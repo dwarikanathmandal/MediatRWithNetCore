@@ -12,5 +12,6 @@ namespace KE.ERP.Api.Features.Touchpoints.Models
     {
         public int TouchpointId { get; set; }
         public string ToucpointName { get; set; }
+        public string TouchpointCode { get; set; }
     }
 }
