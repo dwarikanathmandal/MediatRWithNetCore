@@ -15,6 +15,7 @@ using System.Reflection;
 using KE.ERP.Api.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Cors;
 
 namespace KE.ERP.Api
 {
@@ -33,11 +34,19 @@ namespace KE.ERP.Api
             services.AddControllers();
             services.AddMediatR(Assembly.GetExecutingAssembly());
             //services.AddDbContext<ProductDBContext>();
-            services.AddDbContext<ProductDBContext>(item => item.UseSqlServer(Configuration.GetConnectionString("myconn"))); 
-             services.AddSwaggerGen(c =>
+            services.AddDbContext<ProductDBContext>(item => item.UseSqlServer(Configuration.GetConnectionString("myconn")));
+            services.AddSwaggerGen(c =>
             {
-                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Values Api", Version = "v1" });
-              });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Values Api", Version = "v1" });
+            });
+
+            services.AddCors(config =>
+            {
+                config.AddPolicy("AllowWeb", option =>
+                {
+                    option.AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +63,8 @@ namespace KE.ERP.Api
 
             app.UseAuthorization();
 
+            app.UseCors("AllowWeb");
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -63,6 +74,11 @@ namespace KE.ERP.Api
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Values Api V1");
+            });
+
+            app.Run(async context =>
+            {
+                context.Response.Redirect("swagger");
             });
         }
     }
