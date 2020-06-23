@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using KE.ERP.Domain;
+using KE.ERP.Domain.Touchpoints;
 
 namespace KE.ERP.Api.Persistence.Extensions
 {

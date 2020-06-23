@@ -12,12 +12,12 @@ namespace KE.ERP.Api.Features.Touchpoints
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TouchpointController : ControllerBase
+    public class TouchpointsController : ControllerBase
     {
 
         private readonly IMediator _mediator;       
 
-        public TouchpointController(IMediator mediator)
+        public TouchpointsController(IMediator mediator)
         {
             //_logger = logger;
             _mediator = mediator;

@@ -4,14 +4,16 @@ using KE.ERP.Api.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace KE.ERP.Api.Migrations
 {
     [DbContext(typeof(ProductDBContext))]
-    partial class ProductDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200623135421_InitialCreate_V1")]
+    partial class InitialCreate_V1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -202,43 +204,6 @@ namespace KE.ERP.Api.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("KE.ERP.Domain.Products.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifyDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ProductName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TouchpointId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.HasIndex("TouchpointId");
-
-                    b.ToTable("Products");
-                });
-
             modelBuilder.Entity("KE.ERP.Domain.Products.ProductCategory", b =>
                 {
                     b.Property<int>("Id")
@@ -362,17 +327,6 @@ namespace KE.ERP.Api.Migrations
                     b.HasOne("KE.ERP.Domain.Addresses.Address", "Addresses")
                         .WithMany()
                         .HasForeignKey("AddressId");
-                });
-
-            modelBuilder.Entity("KE.ERP.Domain.Products.Product", b =>
-                {
-                    b.HasOne("KE.ERP.Domain.Products.ProductCategory", "ProductCategory")
-                        .WithMany()
-                        .HasForeignKey("CategoryId");
-
-                    b.HasOne("KE.ERP.Domain.Touchpoints.Touchpoint", "Touchpoint")
-                        .WithMany()
-                        .HasForeignKey("TouchpointId");
                 });
 #pragma warning restore 612, 618
         }

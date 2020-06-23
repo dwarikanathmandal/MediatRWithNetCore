@@ -1,6 +1,6 @@
 using System;
 
-namespace KE.ERP.Domain
+namespace KE.ERP.Domain.Touchpoints
 {
     public class Touchpoint
     {
