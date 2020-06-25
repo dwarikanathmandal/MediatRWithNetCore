@@ -4,7 +4,7 @@ Enterprises resource planning
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### `dotnet build`
-In the project directory, go to KE.ERP.AP<br />
+In the project directory, go to KE.ERP.Api<br />
 Open command promt in administartor mode and run the command
 
 ### `dotnet run`
